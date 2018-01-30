@@ -16,11 +16,39 @@ I also loaded pre-trained word embeddings from [GloVe](https://nlp.stanford.edu/
 
 Word embeddings are just vectors that represent multiple features of a word. In GloVe, vectors represent relative position between words. One simple way to understand this is to look at the following image:
 
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/linear-relationships.png)
 
+When we inspect these visualizations it becomes apparent that the vectors capture some general, and in fact quite useful, semantic information about words and their relationships to one another. 
 
 ## Implementation
 
-This project was implemented using the Keras framework with the Tensorflow backend.
+This project was implemented using Keras framework with Tensorflow backend.
+
+After loading text data, and embedding file, I create an embedding_matrix with as many entries as unique words in training data, where each row is the equivalent embedding rappresentation. If the word is not present in the embedding file, it's rappresentation would be simply a vector of zeros.
+
+
+
+```Python
+LR = 0.0005
+drop_out = 0.3
+batch_dim = 64
+
+loss = 'categorical_crossentropy'
+
+# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
+# and that of a beta strand is around six.
+# See references [6].
+m = Sequential()
+m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
+m.add(Dropout(drop_out))
+m.add(Conv1D(64, 11, padding='same', activation='relu'))
+m.add(Dropout(drop_out))
+m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
+opt = optimizers.Adam(lr=LR)
+m.compile(optimizer=opt,
+          loss=loss,
+          metrics=['accuracy', 'mae'])
+```
 
 Essentially three different different architectures were used:
 
