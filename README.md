@@ -65,10 +65,82 @@ Essentially three different different architectures were used:
 - Only LSTM
 - Both CNN and LSTM
 
+### Only CNN
 
+```Python
+LR = 0.0005
+drop_out = 0.3
+batch_dim = 64
 
+loss = 'categorical_crossentropy'
 
+# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
+# and that of a beta strand is around six.
+# See references [6].
+m = Sequential()
+m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
+m.add(Dropout(drop_out))
+m.add(Conv1D(64, 11, padding='same', activation='relu'))
+m.add(Dropout(drop_out))
+m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
+opt = optimizers.Adam(lr=LR)
+m.compile(optimizer=opt,
+          loss=loss,
+          metrics=['accuracy', 'mae'])
+```
 
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
+### Only LSTM
+
+```Python
+LR = 0.0005
+drop_out = 0.3
+batch_dim = 64
+
+loss = 'categorical_crossentropy'
+
+# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
+# and that of a beta strand is around six.
+# See references [6].
+m = Sequential()
+m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
+m.add(Dropout(drop_out))
+m.add(Conv1D(64, 11, padding='same', activation='relu'))
+m.add(Dropout(drop_out))
+m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
+opt = optimizers.Adam(lr=LR)
+m.compile(optimizer=opt,
+          loss=loss,
+          metrics=['accuracy', 'mae'])
+```
+
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
+
+### Both CNN and LSTM
+
+```Python
+LR = 0.0005
+drop_out = 0.3
+batch_dim = 64
+
+loss = 'categorical_crossentropy'
+
+# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
+# and that of a beta strand is around six.
+# See references [6].
+m = Sequential()
+m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
+m.add(Dropout(drop_out))
+m.add(Conv1D(64, 11, padding='same', activation='relu'))
+m.add(Dropout(drop_out))
+m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
+opt = optimizers.Adam(lr=LR)
+m.compile(optimizer=opt,
+          loss=loss,
+          metrics=['accuracy', 'mae'])
+```
+
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
 
