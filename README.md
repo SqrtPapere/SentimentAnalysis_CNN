@@ -89,7 +89,8 @@ model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
 ## Results
-Using 10% train set e evaluation su tutto il testset ....
+Learning curves values for accuracy and loss are calculated during training using a validation set (10% of training set). 
+
 ### Only CNN 
  [![dobleacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleacc.png)]() | [![dobleloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleloss.png)]() 
 |:---:|:---:|
