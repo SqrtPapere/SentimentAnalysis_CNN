@@ -14,7 +14,7 @@ I chose the IMDB dataset (Maas et al., 2011) which contains 50,000 sentences spl
 
 I also loaded pre-trained word embeddings from [GloVe](https://nlp.stanford.edu/projects/glove/) composed of 400K vocab using 300D vectors. 
 
-Word embeddings are just vectors that represent multiple features of a word. In GloVe, vectors represent relative position between words. One simple way to understand this is to look at the following image:
+Word embedding is a technique where words are encoded as real-valued vectors in a high-dimensional space, where the similarity between words in terms of meaning translates to closeness in the vector space. One simple way to understand this is to look at the following image:
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/linear-relationships.png)
 
