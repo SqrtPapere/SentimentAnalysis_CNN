@@ -24,7 +24,7 @@ When we inspect these visualizations it becomes apparent that the vectors captur
 
 This project was implemented using Keras framework with Tensorflow backend.
 
-After loading text data, and embedding file, I create an embedding_matrix with as many entries as unique words in training data, where each row is the equivalent embedding rappresentation. If the word is not present in the embedding file, it's rappresentation would be simply a vector of zeros.
+After loading text data, and embedding file, I create an embedding_matrix with as many entries as unique words in training data (111525 unique tokens), where each row is the equivalent embedding rappresentation. If the word is not present in the embedding file, it's rappresentation would be simply a vector of zeros.
 
 Moreover, I needed to PAD each review to a fixed length. I decided `MAX_SEQUENCE_LENGTH` to be 500 based on following plots:
 
