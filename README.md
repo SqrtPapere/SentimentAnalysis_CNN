@@ -88,4 +88,17 @@ model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
+## Results
+Work in progress.
+
+## References
+\[1\]: http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
+
+\[2\]: https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
+
+\[3\]: https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
+
+\[4\]: Takeru Miyato, Andrew M. Dai and Ian Goodfellow (2016) -"Virtual Adversarial Training for Semi-Supervised Text Classification"- https://pdfs.semanticscholar.org/a098/6e09559fa6cc173d5c5740aa17030087f0c3.pdf
+
+\[5\] Isaac Caswell, Onkur Sen and Allen Nie - "Exploring Adversarial Learning on Neural Network Models for Text Classification" - https://nlp.stanford.edu/courses/cs224n/2015/reports/20.pdf
 
