@@ -120,25 +120,20 @@ m.compile(optimizer=opt,
 ### Both CNN and LSTM
 
 ```Python
-LR = 0.0005
-drop_out = 0.3
-batch_dim = 64
+sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], input_length=MAX_SEQUENCE_LENGTH, trainable=False)
 
-loss = 'categorical_crossentropy'
+x = embedding_layer(sequence_input)
+x = Dropout(0.3)(x)
+x = Conv1D(200, 5, activation='relu')(x)
+x = MaxPooling1D(pool_size=2)(x)
+x = LSTM(100)(x)
+x = Dropout(0.3)(x)
+prob = Dense(1, activation='sigmoid')(x)
 
-# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
-# and that of a beta strand is around six.
-# See references [6].
-m = Sequential()
-m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
-m.add(Dropout(drop_out))
-m.add(Conv1D(64, 11, padding='same', activation='relu'))
-m.add(Dropout(drop_out))
-m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
-opt = optimizers.Adam(lr=LR)
-m.compile(optimizer=opt,
-          loss=loss,
-          metrics=['accuracy', 'mae'])
+model = Model(sequence_input, prob)
+optimizer = optimizers.Adam(lr=0.0004)
+model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy'])
 ```
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
