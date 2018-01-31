@@ -34,31 +34,6 @@ Moreover, I needed to PAD each review to a fixed length. I decided `MAX_SEQUENCE
 
 The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQUENCE_LENGTH = 500` you can cover the majority of reviews and remove the outliers with too many words.
 
-
-
-
-```Python
-LR = 0.0005
-drop_out = 0.3
-batch_dim = 64
-
-loss = 'categorical_crossentropy'
-
-# We fix the window size to 11 because the average length of an alpha helix is around eleven residues
-# and that of a beta strand is around six.
-# See references [6].
-m = Sequential()
-m.add(Conv1D(128, 11, padding='same', activation='relu', input_shape=(dataset.sequence_len, dataset.amino_acid_residues)))
-m.add(Dropout(drop_out))
-m.add(Conv1D(64, 11, padding='same', activation='relu'))
-m.add(Dropout(drop_out))
-m.add(Conv1D(dataset.num_classes, 11, padding='same', activation='softmax'))
-opt = optimizers.Adam(lr=LR)
-m.compile(optimizer=opt,
-          loss=loss,
-          metrics=['accuracy', 'mae'])
-```
-
 Essentially three different different architectures were used:
 
 - Only CNN
@@ -95,7 +70,8 @@ m.compile(optimizer=opt,
 
 ```Python
 sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
-embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], input_length=MAX_SEQUENCE_LENGTH, trainable=False)
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix],
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=False)
 
 x = embedding_layer(sequence_input)
 x = Dropout(0.3)(x)
@@ -112,7 +88,8 @@ model.compile(loss='binary_crossentropy',optimizer='adam', metrics=['accuracy'])
 
 ```Python
 sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
-embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], input_length=MAX_SEQUENCE_LENGTH, trainable=False)
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix],
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=False)
 
 x = embedding_layer(sequence_input)
 x = Dropout(0.3)(x)
