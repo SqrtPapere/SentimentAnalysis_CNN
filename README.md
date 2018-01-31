@@ -102,7 +102,7 @@ On entire Test Set: `Accuracy = 89.14%`
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 89.14%`
+On entire Test Set: `Accuracy = 88.92%`
 
 ### Both CNN and LSTM
  [![dobleacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleacc.png)]() | [![dobleloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleloss.png)]() 
