@@ -89,8 +89,16 @@ model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
 ## Results
-Work in progress.
+Using 10% train set e evaluation su tutto il testset ....
+### Only CNN 
 
+### Only LSTM 
+
+### Both CNN and LSTM
+ [![dobleacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleacc.png)]() | [![dobleloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleloss.png)]() 
+|:---:|:---:|
+| Accuracy | Loss |
+On entire Test Set: `Accuracy = 89.14%
 ## References
 \[1\]: http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
 
