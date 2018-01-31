@@ -28,9 +28,11 @@ After loading text data, and embedding file, I create an embedding_matrix with a
 
 Moreover, I needed to PAD each review to a fixed length. I decided `MAX_SEQUENCE_LENGTH` to be 500 based on following plots:
 
-![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/box.png)
-![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/hist.png)
+ [![Box](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/box.png)]() | [![hist](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/hist.png)]() 
+|:---:|:---:|
+| Box and Whisker | Histogram |
 
+The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQUENCE_LENGTH = 500` you can cover the majority of reviews and remove the outliers with too many words.
 
 
 
