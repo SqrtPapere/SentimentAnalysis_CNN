@@ -37,7 +37,7 @@ The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQ
 Essentially three different different architectures were used:
 
 - Only CNN
-- Only LSTM
+- Only LSTM (and BIDIRECTIONAL LSTM)
 - Both CNN and LSTM
 
 ### Only CNN
@@ -62,6 +62,26 @@ prob = Dense(1, activation='sigmoid')(x)
 
 model = Model(sequence_input, prob)
 model.compile(loss='binary_crossentropy',optimizer='adam', metrics=['accuracy'])
+```
+
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmgraph.png)
+
+#### BiDir
+
+```Python
+sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
+
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix],
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=False)
+
+x = embedding_layer(sequence_input)
+x = Dropout(0.3)(x)
+x = Bidirectional(LSTM(100))(x)
+x = Dropout(0.3)(x)
+prob = Dense(1, activation='sigmoid')(x)
+
+model = Model(sequence_input, prob)
+
 ```
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmgraph.png)
