@@ -73,14 +73,15 @@ Using non trainable word embedding.
 ```Python
 sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 
-embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], 
-                                               input_length=MAX_SEQUENCE_LENGTH, trainable=True)
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix],
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=False)
+
 x = embedding_layer(sequence_input)
 x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Conv1D(200, 5, activation='relu')(x)
 x = MaxPooling1D(pool_size=2)(x)
 x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Conv1D(200, 5, activation='relu')(x)
 x = Flatten()(x)
 x = Dropout(0.5)(x)
 x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
