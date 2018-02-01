@@ -204,7 +204,7 @@ On entire Test Set: `Accuracy = 87.56%`
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 88.17%`
+On entire Test Set: `Accuracy =87.72%`
 
 ### Only LSTM 
  [![lstmacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmacc.png)]() | [![lstmloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmloss.png)]() 
