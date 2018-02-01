@@ -193,11 +193,11 @@ Learning curves values for accuracy and loss are calculated during training usin
 On entire Test Set: `Accuracy = 88.17%`
 
 #### static
- [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
+ [![cnnaccstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccstatic.png)]() | [![cnnlossstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossstatic.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 88.17%`
+On entire Test Set: `Accuracy = 87.56%`
 
 #### random
  [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
