@@ -99,24 +99,45 @@ Without using word embedding.
 ```Python
 sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 
-embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, 
-                                               input_length=MAX_SEQUENCE_LENGTH, trainable=True)
-x = embedding_layer(sequence_input)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
-x = MaxPooling1D(pool_size=2)(x)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
-x = Flatten()(x)
-x = Dropout(0.5)(x)
-x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
-x = Dropout(0.5)(x)
-prob = Dense(1, activation='sigmoid')(x)
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH, trainable=True)
 
-model = Model(sequence_input, prob)
+filtersize_list = [3, 8]
+number_of_filters_per_filtersize = [10, 10]
+pool_length_list = [2, 2]
+dropout_list = [0.5, 0.5]
 
-optimizer = optimizers.Adam(lr=0.00035)
-model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
+input_node = Input(shape=(MAX_SEQUENCE_LENGTH, EMBEDDING_DIM))
+conv_list = []
+for index, filtersize in enumerate(filtersize_list):
+    nb_filter = number_of_filters_per_filtersize[index]
+    pool_length = pool_length_list[index]
+    conv = Conv1D(filters=nb_filter, kernel_size=filtersize, activation='relu')(input_node)
+    drop = Dropout(0.3)(conv)
+    pool = MaxPooling1D(pool_length=pool_length)(conv)
+    flatten = Flatten()(pool)
+    conv_list.append(flatten)
+
+if (len(filtersize_list) > 1):
+    out = Merge(mode='concat')(conv_list)
+else:
+    out = conv_list[0]
+
+graph = Model(input=input_node, output=out)
+
+model = Sequential()
+model.add(embedding_layer)
+model.add(Dropout(dropout_list[0], input_shape=(MAX_SEQUENCE_LENGTH, EMBEDDING_DIM)))
+model.add(graph)
+model.add(Dense(50))
+model.add(Activation('relu'))
+model.add(Dropout(dropout_list[1]))
+model.add(Dense(1, activation='sigmoid'))
+
+optimizer = optimizers.Adam(lr=0.0004)
+
+model.compile(loss='binary_crossentropy',
+              optimizer=optimizer,
+              metrics=['acc'])
 ```
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
@@ -204,7 +225,7 @@ On entire Test Set: `Accuracy = 87.56%`
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy =87.72%`
+On entire Test Set: `Accuracy = 87.72%`
 
 ### Only LSTM 
  [![lstmacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmacc.png)]() | [![lstmloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmloss.png)]() 
