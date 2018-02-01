@@ -99,7 +99,7 @@ Without using word embedding.
 ```Python
 sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 
-embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], 
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, 
                                                input_length=MAX_SEQUENCE_LENGTH, trainable=True)
 x = embedding_layer(sequence_input)
 x = Dropout(0.5)(x)
@@ -200,7 +200,7 @@ On entire Test Set: `Accuracy = 88.17%`
 On entire Test Set: `Accuracy = 87.56%`
 
 #### random
- [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
+ [![cnnaccrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccrandom.png)]() | [![cnnlossrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossrandom.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
