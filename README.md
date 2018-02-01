@@ -200,7 +200,7 @@ On entire Test Set: `Accuracy = 88.17%`
 On entire Test Set: `Accuracy = 87.56%`
 
 #### random
- [![cnnaccrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccrandom.png)]() | [![cnnlossrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossrandom.png)]() 
+ [![cnnaccrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccrand.png)]() | [![cnnlossrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossrand.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
