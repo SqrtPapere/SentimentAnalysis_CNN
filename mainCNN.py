@@ -1,4 +1,3 @@
-
 # https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 import os
 import numpy as np
@@ -10,7 +9,7 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 
 from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Input, GlobalMaxPooling1D, Dropout, Merge, BatchNormalization
 from keras.models import Model
-from keras import optimizers
+from keras import optimizers, regularizers
 
 import matplotlib.pyplot as plt
 
@@ -66,7 +65,7 @@ test_sequences = tokenizer.texts_to_sequences(test_text)
 word_index = tokenizer.word_index # dictionary mapping words (str) to their index starting from 0 (int)
 print('Found %s unique tokens.' % len(word_index))
 
-train_data = pad_sequences(train_sequences, maxlen=MAX_SEQUENCE_LENGTH) # each element of sequences is cropped or padded to reach maxlen 
+train_data = pad_sequences(train_sequences, maxlen=MAX_SEQUENCE_LENGTH) # each element of sequences is cropped or padded to reach maxlen 
 test_data = pad_sequences(test_sequences, maxlen=MAX_SEQUENCE_LENGTH)
 
 train_label = np.asarray(train_label)
@@ -104,34 +103,34 @@ embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding
 
 #embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH)
 
-x = embedding_layer(sequence_input)
-x = Dropout(0.2)(x)
-x = Conv1D(200, 5, activation='relu')(x)
-x = Dropout(0.2)(x)
-x = MaxPooling1D(pool_size=2)(x)
-x = Conv1D(200, 3, activation='relu')(x)
-x = Dropout(0.2)(x)
-x = MaxPooling1D(pool_size=2)(x)
-x = Flatten()(x)
-x = Dense(128, activation='sigmoid')(x)
-x = Dropout(0.35)(x)
-prob = Dense(1, activation='sigmoid')(x)
-
 # x = embedding_layer(sequence_input)
-# x = Dropout(0.3)(x)
+# x = Dropout(0.2)(x)
 # x = Conv1D(200, 5, activation='relu')(x)
+# x = Dropout(0.2)(x)
 # x = MaxPooling1D(pool_size=2)(x)
-# x = Dropout(0.3)(x)
-# x = Conv1D(200, 5, activation='relu')(x)
+# x = Conv1D(200, 3, activation='relu')(x)
+# x = Dropout(0.2)(x)
+# x = MaxPooling1D(pool_size=2)(x)
 # x = Flatten()(x)
-# x = Dropout(0.3)(x)
-# x = Dense(180,activation='sigmoid')(x)
-# x = Dropout(0.3)(x)
+# x = Dense(128, activation='sigmoid')(x)
+# x = Dropout(0.35)(x)
 # prob = Dense(1, activation='sigmoid')(x)
+
+x = embedding_layer(sequence_input)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = MaxPooling1D(pool_size=2)(x)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Flatten()(x)
+x = Dropout(0.5)(x)
+x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
+x = Dropout(0.5)(x)
+prob = Dense(1, activation='sigmoid')(x)
 
 model = Model(sequence_input, prob)
 
-optimizer = optimizers.Adam(lr=0.0004)
+optimizer = optimizers.Adam(lr=0.00035)
 model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 
 tensorboard = TensorBoard(log_dir='./Graph', histogram_freq=0, write_graph=True)
@@ -146,7 +145,7 @@ cp = ModelCheckpoint('bestModel.h5', monitor='val_acc', save_best_only=True, mod
 
 if do_early_stopping:
     print('using early stopping strategy')
-    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=10, batch_size=128, callbacks = [early_stopping, tensorboard])
+    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=11, batch_size=64, callbacks = [early_stopping, tensorboard])
 else:
     history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=10, batch_size=128)
 
@@ -160,5 +159,3 @@ print("mae: "+str(mae))
 model.save('my_model3.h5')
 
 plotting(history)
-
-
