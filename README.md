@@ -67,6 +67,8 @@ model = Model(sequence_input, prob)
 optimizer = optimizers.Adam(lr=0.00035)
 model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 ```
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/graphcnnstatic.png)
+
 
 #### static
 Using non trainable word embedding.
@@ -137,7 +139,7 @@ model.compile(loss='binary_crossentropy',
               metrics=['acc'])
 ```
 
-![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/graphcnnrand.png)
 
 ### Only LSTM
 
