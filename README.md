@@ -144,7 +144,11 @@ model.compile(loss='binary_crossentropy',
               optimizer=optimizer,
               metrics=['acc'])
 ```
-
+```
+Total params: 5,779,421
+Trainable params: 5,779,421
+Non-trainable params: 0
+```
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/graphcnnrand.png)
 
 ### Only LSTM
