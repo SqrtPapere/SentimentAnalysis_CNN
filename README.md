@@ -36,8 +36,8 @@ The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQ
 
 Essentially three different different architectures were used:
 
-- Only CNN (random/static/non-static)
-- Only LSTM (and BIDIRECTIONAL LSTM)
+- Only CNN (non-static/static/random)
+- Only LSTM (and BiDirectional LSTM)
 - Both CNN and LSTM
 
 ### Only CNN
@@ -94,7 +94,7 @@ optimizer = optimizers.Adam(lr=0.00035)
 model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 ```
 
-#### random
+#### random (Idea from "Convolutional Neural Networks for Sentence Classification" by Yoon Kim)
 Without using word embedding.
 
 ```Python
@@ -259,4 +259,6 @@ On entire Test Set: `Accuracy = 90.14%`
 \[4\]: Takeru Miyato, Andrew M. Dai and Ian Goodfellow (2016) -"Virtual Adversarial Training for Semi-Supervised Text Classification"- https://pdfs.semanticscholar.org/a098/6e09559fa6cc173d5c5740aa17030087f0c3.pdf
 
 \[5\] Isaac Caswell, Onkur Sen and Allen Nie - "Exploring Adversarial Learning on Neural Network Models for Text Classification" - https://nlp.stanford.edu/courses/cs224n/2015/reports/20.pdf
+
+\[6\] Yoon Kim - "Convolutional Neural Networks for Sentence Classification" - http://aclweb.org/anthology/D14-1181
 
