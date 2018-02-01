@@ -96,6 +96,12 @@ optimizer = optimizers.Adam(lr=0.00035)
 model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 ```
 
+```
+Total params: 41,842,561
+Trainable params: 8,384,761
+Non-trainable params: 33,457,800
+```
+
 #### random (Idea from "Convolutional Neural Networks for Sentence Classification" by Yoon Kim)
 Without using word embedding.
 
