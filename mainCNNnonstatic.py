@@ -101,21 +101,6 @@ sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 
 embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], input_length=MAX_SEQUENCE_LENGTH, trainable=True)
 
-#embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH)
-
-# x = embedding_layer(sequence_input)
-# x = Dropout(0.2)(x)
-# x = Conv1D(200, 5, activation='relu')(x)
-# x = Dropout(0.2)(x)
-# x = MaxPooling1D(pool_size=2)(x)
-# x = Conv1D(200, 3, activation='relu')(x)
-# x = Dropout(0.2)(x)
-# x = MaxPooling1D(pool_size=2)(x)
-# x = Flatten()(x)
-# x = Dense(128, activation='sigmoid')(x)
-# x = Dropout(0.35)(x)
-# prob = Dense(1, activation='sigmoid')(x)
-
 x = embedding_layer(sequence_input)
 x = Dropout(0.5)(x)
 x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)

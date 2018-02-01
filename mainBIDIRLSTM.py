@@ -1,3 +1,4 @@
+
 # https://machinelearningmastery.com/predict-sentiment-movie-reviews-using-deep-learning/
 import os
 import numpy as np
@@ -5,13 +6,15 @@ import numpy as np
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
+from keras.callbacks import EarlyStopping, TensorBoard, ModelCheckpoint
 
-from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Input, GlobalMaxPooling1D, Dropout, Merge, BatchNormalization
+from keras.layers import Embedding, Conv1D, MaxPooling1D, Flatten, Dense, Input, Dropout
 from keras.models import Model
-from keras import optimizers, regularizers
 
 import matplotlib.pyplot as plt
+
+from keras.layers import LSTM, Bidirectional
+
 
 import pickle
 
@@ -33,13 +36,12 @@ def plotting(history):
     plt.legend(['train', 'test'], loc='upper left')
     plt.show()
 
-
 do_early_stopping = True
 # top words to be considered in Tokenizer
 NUM_WORDS = 20000
 
 # Length of phrases for padding if shorter or cropping if longer
-MAX_SEQUENCE_LENGTH = 450
+MAX_SEQUENCE_LENGTH = 500
 
 EMBEDDING_DIM = 300
 
@@ -65,7 +67,7 @@ test_sequences = tokenizer.texts_to_sequences(test_text)
 word_index = tokenizer.word_index # dictionary mapping words (str) to their index starting from 0 (int)
 print('Found %s unique tokens.' % len(word_index))
 
-train_data = pad_sequences(train_sequences, maxlen=MAX_SEQUENCE_LENGTH) # each element of sequences is cropped or padded to reach maxlen 
+train_data = pad_sequences(train_sequences, maxlen=MAX_SEQUENCE_LENGTH) # each element of sequences is cropped or padded to reach maxlen 
 test_data = pad_sequences(test_sequences, maxlen=MAX_SEQUENCE_LENGTH)
 
 train_label = np.asarray(train_label)
@@ -102,45 +104,39 @@ sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], input_length=MAX_SEQUENCE_LENGTH, trainable=False)
 
 x = embedding_layer(sequence_input)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu')(x)
-x = MaxPooling1D(pool_size=2)(x)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu')(x)
-x = Flatten()(x)
-x = Dropout(0.5)(x)
-x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
-x = Dropout(0.5)(x)
+x = Dropout(0.3)(x)
+x = Bidirectional(LSTM(100))(x)
+x = Dropout(0.3)(x)
 prob = Dense(1, activation='sigmoid')(x)
 
 model = Model(sequence_input, prob)
 
-optimizer = optimizers.Adam(lr=0.00035)
-model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
+model.compile(loss='binary_crossentropy',optimizer='adam', metrics=['accuracy'])
 
-tensorboard = TensorBoard(log_dir='./Graph', histogram_freq=0, write_graph=True)
+tensorboard = TensorBoard(log_dir='./GraphLSTM', histogram_freq=0, write_graph=True)
 
 print('model compiled')
 
 print(model.summary()) 
 
 early_stopping = EarlyStopping(monitor='val_loss', patience = 2, mode = 'min')
-cp = ModelCheckpoint('bestModel.h5', monitor='val_acc', save_best_only=True, mode='max')
+cp = ModelCheckpoint('ModelBLSTM.h5', monitor='val_acc', save_best_only=True, mode='max')
 
 
 if do_early_stopping:
     print('using early stopping strategy')
-    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=11, batch_size=64, callbacks = [early_stopping, tensorboard])
+    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=4, batch_size=128, callbacks = [early_stopping, tensorboard])
 else:
-    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=10, batch_size=128)
+    history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=8, batch_size=128)
 
 
-loss, acc, mae = model.evaluate(x_test, y_test)
+loss, acc = model.evaluate(x_test, y_test)
 
 print("loss: "+str(loss))
 print("accuracy: "+str(acc)) 
-print("mae: "+str(mae)) 
 
 model.save('my_model3.h5')
 
 plotting(history)
+
+
