@@ -46,13 +46,78 @@ Essentially three different different architectures were used:
 Using trainable word embedding.
 
 ```Python
-work in progresss...
+sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
+
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], 
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=True)
+x = embedding_layer(sequence_input)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = MaxPooling1D(pool_size=2)(x)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Flatten()(x)
+x = Dropout(0.5)(x)
+x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
+x = Dropout(0.5)(x)
+prob = Dense(1, activation='sigmoid')(x)
+
+model = Model(sequence_input, prob)
+
+optimizer = optimizers.Adam(lr=0.00035)
+model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 ```
+
 #### static
 Using non trainable word embedding.
+```Python
+sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
+
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], 
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=True)
+x = embedding_layer(sequence_input)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = MaxPooling1D(pool_size=2)(x)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Flatten()(x)
+x = Dropout(0.5)(x)
+x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
+x = Dropout(0.5)(x)
+prob = Dense(1, activation='sigmoid')(x)
+
+model = Model(sequence_input, prob)
+
+optimizer = optimizers.Adam(lr=0.00035)
+model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
+```
 
 #### random
-Without using word embedding, using trainable embedding layer.
+Without using word embedding.
+
+```Python
+sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
+
+embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix], 
+                                               input_length=MAX_SEQUENCE_LENGTH, trainable=True)
+x = embedding_layer(sequence_input)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = MaxPooling1D(pool_size=2)(x)
+x = Dropout(0.5)(x)
+x = Conv1D(200, 5, activation='relu', kernel_regularizer=regularizers.l2(0.01))(x)
+x = Flatten()(x)
+x = Dropout(0.5)(x)
+x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
+x = Dropout(0.5)(x)
+prob = Dense(1, activation='sigmoid')(x)
+
+model = Model(sequence_input, prob)
+
+optimizer = optimizers.Adam(lr=0.00035)
+model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
+```
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
