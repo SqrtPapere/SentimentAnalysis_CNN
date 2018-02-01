@@ -212,14 +212,14 @@ Learning curves values for accuracy and loss are calculated during training usin
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 88.17%`
+On entire Test Set: `Accuracy = 89.96%`
 
 #### static
  [![cnnaccstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccstatic.png)]() | [![cnnlossstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossstatic.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 87.56%`
+On entire Test Set: `Accuracy = 88.56%`
 
 #### random
  [![cnnaccrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccrand.png)]() | [![cnnlossrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossrand.png)]() 
@@ -240,14 +240,14 @@ On entire Test Set: `Accuracy = 88.92%`
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 86.96%`
+On entire Test Set: `Accuracy = 87.96%`
 
 ### Both CNN and LSTM
  [![dobleacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleacc.png)]() | [![dobleloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleloss.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 89.14%`
+On entire Test Set: `Accuracy = 90.14%`
 
 ## References
 \[1\]: http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
