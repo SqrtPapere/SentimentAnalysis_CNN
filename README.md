@@ -120,11 +120,26 @@ model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy
 Learning curves values for accuracy and loss are calculated during training using a validation set (10% of training set). 
 
 ### Only CNN 
- [![dobleacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleacc.png)]() | [![dobleloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/dobleloss.png)]() 
+#### non-static
+ [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 89.14%`
+On entire Test Set: `Accuracy = 88.17%`
+
+#### static
+ [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
+|:---:|:---:|
+| Accuracy | Loss |
+
+On entire Test Set: `Accuracy = 88.17%`
+
+#### random
+ [![cnnaccnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccnonstatic.png)]() | [![cnnlossnonstatic](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossnonstatic.png)]() 
+|:---:|:---:|
+| Accuracy | Loss |
+
+On entire Test Set: `Accuracy = 88.17%`
 
 ### Only LSTM 
  [![lstmacc](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmacc.png)]() | [![lstmloss](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/lstmloss.png)]() 
