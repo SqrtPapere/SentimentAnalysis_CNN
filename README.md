@@ -118,11 +118,7 @@ for index, filtersize in enumerate(filtersize_list):
     flatten = Flatten()(pool)
     conv_list.append(flatten)
 
-if (len(filtersize_list) > 1):
-    out = Merge(mode='concat')(conv_list)
-else:
-    out = conv_list[0]
-
+out = Merge(mode='concat')(conv_list)
 graph = Model(input=input_node, output=out)
 
 model = Sequential()
