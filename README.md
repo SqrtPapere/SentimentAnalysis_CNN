@@ -36,15 +36,23 @@ The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQ
 
 Essentially three different different architectures were used:
 
-- Only CNN
+- Only CNN (random/static/non-static)
 - Only LSTM (and BIDIRECTIONAL LSTM)
 - Both CNN and LSTM
 
 ### Only CNN
 
+#### non-static
+Using trainable word embedding.
+
 ```Python
 work in progresss...
 ```
+#### static
+Using non trainable word embedding.
+
+#### random
+Without using word embedding, using trainable embedding layer.
 
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/doblegraph.png)
 
