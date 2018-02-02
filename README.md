@@ -77,28 +77,27 @@ sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 
 embedding_layer = Embedding(len(word_index)+1, EMBEDDING_DIM, weights=[embedding_matrix],
                                                input_length=MAX_SEQUENCE_LENGTH, trainable=False)
-
 x = embedding_layer(sequence_input)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu')(x)
+x = Dropout(0.3)(x)
+x = Conv1D(25, 5, activation='relu')(x)
 x = MaxPooling1D(pool_size=2)(x)
-x = Dropout(0.5)(x)
-x = Conv1D(200, 5, activation='relu')(x)
+x = Dropout(0.3)(x)
+x = Conv1D(20, 5, activation='relu')(x)
 x = Flatten()(x)
-x = Dropout(0.5)(x)
-x = Dense(180,activation='sigmoid', kernel_regularizer=regularizers.l2(0.05))(x)
-x = Dropout(0.5)(x)
+x = Dropout(0.3)(x)
+x = Dense(120,activation='sigmoid')(x)
+x = Dropout(0.3)(x)
 prob = Dense(1, activation='sigmoid')(x)
 
 model = Model(sequence_input, prob)
 
-optimizer = optimizers.Adam(lr=0.00035)
+optimizer = optimizers.Adam(lr=0.001)
 model.compile(loss='binary_crossentropy',optimizer=optimizer, metrics=['accuracy', 'mae'])
 ```
 
 ```
-Total params: 41,842,561
-Trainable params: 8,384,761
+Total params: 34,023,686
+Trainable params: 565,886
 Non-trainable params: 33,457,800
 ```
 
@@ -227,7 +226,7 @@ On entire Test Set: `Accuracy = 89.96%`
 |:---:|:---:|
 | Accuracy | Loss |
 
-On entire Test Set: `Accuracy = 88.56%`
+On entire Test Set: `Accuracy = 88.98%`
 
 #### random
  [![cnnaccrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnaccrand.png)]() | [![cnnlossrandom](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/cnnlossrand.png)]() 
