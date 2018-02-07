@@ -14,20 +14,27 @@ import pickle
 EMBEDDING_DIM = 300
 NUM_WORDS = 20000
 
-positiveFiles = '/Users/francescopegoraro/Desktop/datasets/aclImdb/train/pos'
-negativeFiles = '/Users/francescopegoraro/Desktop/datasets/aclImdb/train/neg'
+########## Change these!
 
-positive_testset_dir = '/Users/francescopegoraro/Desktop/datasets/aclImdb/test/pos'
-negative_testset_dir = '/Users/francescopegoraro/Desktop/datasets/aclImdb/test/neg'
+dataset_dir = '/Users/francescopegoraro/Desktop/datasets/aclImdb'
+glove_dir = '/Users/francescopegoraro/Dropbox/progettoML/glove.6B'
+
+##########
+
+positiveFiles = dataset_dir+'/train/pos'
+negativeFiles = dataset_dir+'/train/neg'
+
+positive_testset_dir = dataset_dir+'/test/pos'
+negative_testset_dir = dataset_dir+'/test/neg'
 
 if EMBEDDING_DIM == 50:
-    glove_embedding_file = '/Users/francescopegoraro/Dropbox/progettoML/glove.6B/glove.6B.50d.txt'
+    glove_embedding_file = glove_dir+'/glove.6B.50d.txt'
 elif EMBEDDING_DIM == 100:
-    glove_embedding_file = '/Users/francescopegoraro/Dropbox/progettoML/glove.6B/glove.6B.100d.txt'
+    glove_embedding_file = glove_dir+'/glove.6B.100d.txt'
 elif EMBEDDING_DIM == 200:
-    glove_embedding_file = '/Users/francescopegoraro/Dropbox/progettoML/glove.6B/glove.6B.200d.txt'
+    glove_embedding_file = glove_dir+'/glove.6B.200d.txt'
 elif EMBEDDING_DIM == 300:
-    glove_embedding_file = '/Users/francescopegoraro/Google Drive/progettoML/glove.6B/glove.6B.300d.txt'
+    glove_embedding_file = glove_dir+'/glove.6B.300d.txt'
 else: 
     print("Wrong embedding_dim submitted!")
     exit()
