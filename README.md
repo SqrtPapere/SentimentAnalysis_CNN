@@ -33,6 +33,9 @@ Word embedding is a technique where words are encoded as real-valued vectors in 
 
 When we inspect these visualizations it becomes apparent that the vectors capture some general, and in fact quite useful, semantic information about words and their relationships to one another. 
 
+#### Visualization of GloVe
+
+Using PCA to reduce 300D word embeddings to 50D and then t-sne to 3D:
 ![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/tsne.png)
 
 ## Implementation
