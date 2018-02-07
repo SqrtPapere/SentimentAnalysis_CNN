@@ -2,13 +2,26 @@
 Sentiment Analysis for reviews using IMDB Dataset with CNN and LSTM
 ___
 
+### Run
+
+- get data: download [IMDB Dataset](http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz) and [Glove embeddings](http://nlp.stanford.edu/data/glove.6B.zip).
+- Clone and unzip this repo.
+- modify variables `dataset_dir ` and `glove_dir`  in `saverData.py` with your absolute path to dataset and embedding directory.
+- Run `saverData.py`, this will load your dataset and embedding, saving them in numpy format.
+- Run one of the following: `mainBIDIRLSTM.py`, `mainCNNnonstatic.py`, `mainCNNrand.py`, `mainCNNstatic.py`, `mainDOBLE.py`, `mainLSTM.py`
+
+| -  | Time |
+| ------------- | ------------- |
+| CPU  |  ~ 6 H |
+| GPU  | ~ 10 m  |
+
 ## Introduction
 
 Sentiment Analysis is the process of determining whether a piece of writing is positive, negative or neutral. It’s also known as opinion mining, deriving the opinion or attitude of a speaker. A common use case for this technology is to discover how people feel about a particular topic. In this case, the goal is to determine if a movie review is either positive or negative using various deep learning techniques.
 
 ## Data
 
-I chose the IMDB dataset (Maas et al., 2011) which contains 50,000 sentences split equally into training and testing sets. Each training instance contains an entire review written by one individual. 
+I chose the IMDB [dataset](http://ai.stanford.edu/~amaas/data/sentiment/) (Maas et al., 2011) which contains 50,000 sentences split equally into training and testing sets. Each training instance contains an entire review written by one individual. 
 
 ### Embedding
 
@@ -269,3 +282,4 @@ On entire Test Set: `Accuracy = 90.14%`
 
 \[6\] Yoon Kim - "Convolutional Neural Networks for Sentence Classification" - http://aclweb.org/anthology/D14-1181
 
+\[7\] Maas, Andrew L.  and  Daly, Raymond E.  and  Pham, Peter T.  and  Huang, Dan  and  Ng, Andrew Y.  and  Potts, Christopher - "Learning Word Vectors for Sentiment Analysis" - http://www.aclweb.org/anthology/P11-1015
