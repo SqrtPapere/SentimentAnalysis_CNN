@@ -9,8 +9,11 @@ ___
 - modify variables `dataset_dir ` and `glove_dir`  in `saverData.py` with your absolute path to dataset and embedding directory.
 - Run `saverData.py`, this will load your dataset and embedding, saving them in numpy format.
 - Run one of the following: `mainBIDIRLSTM.py`, `mainCNNnonstatic.py`, `mainCNNrand.py`, `mainCNNstatic.py`, `mainDOBLE.py`, `mainLSTM.py`
-
-
+| | ETA |
+|:---:|:---:|
+| CPU | ~ 6 H |
+|:---:|:---:|
+| GPU | ~ 10 m |
 
 ## Introduction
 
