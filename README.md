@@ -33,6 +33,8 @@ Word embedding is a technique where words are encoded as real-valued vectors in 
 
 When we inspect these visualizations it becomes apparent that the vectors capture some general, and in fact quite useful, semantic information about words and their relationships to one another. 
 
+![](https://github.com/SqrtPapere/SentimentAnalysis_CNN/blob/master/Images/tsne.png)
+
 ## Implementation
 
 This project was implemented using Keras framework with Tensorflow backend.
