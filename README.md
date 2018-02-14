@@ -42,7 +42,7 @@ Using PCA to reduce 300D word embeddings to 50D and then t-sne to 3D:
 
 This project was implemented using Keras framework with Tensorflow backend.
 
-After loading text data, and embedding file, I create an embedding_matrix with as many entries as unique words in training data (111525 unique tokens), where each row is the equivalent embedding rappresentation. If the word is not present in the embedding file, it's rappresentation would be simply a vector of zeros.
+After loading text data, and embedding file, I create an embedding_matrix with as many entries as unique words in training data (111525 unique tokens), where each row is the equivalent embedding representation. If the word is not present in the embedding file, it's representation would be simply a vector of zeros.
 
 Moreover, I needed to PAD each review to a fixed length. I decided `MAX_SEQUENCE_LENGTH` to be 500 based on following plots:
 
