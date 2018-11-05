@@ -52,7 +52,7 @@ Moreover, I needed to PAD each review to a fixed length. I decided `MAX_SEQUENCE
 
 The mean number of word per review is 230 with a variance of 171. Using `MAX_SEQUENCE_LENGTH = 500` you can cover the majority of reviews and remove the outliers with too many words.
 
-Essentially three different different architectures were used:
+Essentially three different architectures were used:
 
 - Only CNN (non-static/static/random)
 - Only LSTM (and BiDirectional LSTM)
